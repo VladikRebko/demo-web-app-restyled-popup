@@ -37,16 +37,10 @@ export default class Grid extends Component {
           data={data}
           columns={[
             {
-              Header: "ID",
-              accessor: "ID",
+              Header: "Company",
+              accessor: "Company",
               Cell: this.renderEditable,
-              minWidth: 30
-            },
-            {
-              Header: "First Name",
-              accessor: "FirstName",
-              Cell: this.renderEditable,
-              minWidth: 90
+              minWidth: 270
             },
             {
               Header: "Last Name",
@@ -55,81 +49,16 @@ export default class Grid extends Component {
               minWidth: 90
             },
             {
-              Header: "Title",
-              accessor: "Title",
+              Header: "First Name",
+              accessor: "FirstName",
               Cell: this.renderEditable,
-              minWidth: 120
-            },
-            {
-              Header: "BirthDay",
-              accessor: "BirthDay",
-              Cell: this.renderEditable,
-              minWidth: 85
-            },
-            {
-              Header: "Address",
-              accessor: "Address",
-              Cell: this.renderEditable,
-              minWidth: 250
-            },
-            {
-              Header: "City",
-              accessor: "City",
-              Cell: this.renderEditable,
-              minWidth: 150
-            },
-            {
-              Header: "Postal",
-              accessor: "Postal",
-              Cell: this.renderEditable
-            },
-            {
-              Header: "Country",
-              accessor: "Country",
-              Cell: this.renderEditable,
-              minWidth: 130
-            },
-            {
-              Header: "Company",
-              accessor: "Company",
-              Cell: this.renderEditable,
-              minWidth: 270
+              minWidth: 90
             },
             {
               Header: "Email",
               accessor: "Email",
               Cell: this.renderEditable,
               minWidth: 325
-            },
-            {
-              Header: "Phone",
-              accessor: "Phone",
-              Cell: this.renderEditable,
-              minWidth: 135
-            },
-            {
-              Header: "Gender",
-              accessor: "Gender",
-              Cell: this.renderEditable,
-              minWidth: 70
-            },
-            {
-              Header: "Industry",
-              accessor: "Industry",
-              Cell: this.renderEditable,
-              minWidth: 720
-            },
-            {
-              Header: "WinChance",
-              accessor: "WinChance",
-              Cell: this.renderEditable,
-              minWidth: 110 
-            },
-            {
-              Header: "IsActive",
-              accessor: "IsActive",
-              Cell: this.renderEditable,
-              minWidth: 70
             },
             {
               Header: "Amount",
@@ -142,6 +71,12 @@ export default class Grid extends Component {
               accessor: "Currency",
               Cell: this.renderEditable,
               minWidth: 80
+            },
+            {
+              Header: "Win%",
+              accessor: "WinChance",
+              Cell: this.renderEditable,
+              minWidth: 110 
             }
           ]}
           defaultPageSize={22}
