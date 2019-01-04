@@ -17,7 +17,7 @@ export default class Grid extends Component {
         style={{ backgroundColor: "#fafafa" }}
         contentEditable
         suppressContentEditableWarning
-        onDoubleClick={e => {
+        onClick={e => {
           const data = [...this.state.data];
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
           this.setState({ data });
@@ -39,37 +39,44 @@ export default class Grid extends Component {
             {
               Header: "ID",
               accessor: "ID",
-              Cell: this.renderEditable
+              Cell: this.renderEditable,
+              minWidth: 30
             },
             {
-              Header: "FirstName",
+              Header: "First Name",
               accessor: "FirstName",
-              Cell: this.renderEditable
+              Cell: this.renderEditable,
+              minWidth: 90
             },
             {
-              Header: "LastName",
-              id: "LastName",
-              Cell: this.renderEditable
+              Header: "Last Name",
+              accessor: "LastName",
+              Cell: this.renderEditable,
+              minWidth: 90
             },
             {
               Header: "Title",
               accessor: "Title",
-              Cell: this.renderEditable
+              Cell: this.renderEditable,
+              minWidth: 120
             },
             {
               Header: "BirthDay",
               accessor: "BirthDay",
-              Cell: this.renderEditable
+              Cell: this.renderEditable,
+              minWidth: 85
             },
             {
               Header: "Address",
               accessor: "Address",
-              Cell: this.renderEditable
+              Cell: this.renderEditable,
+              minWidth: 250
             },
             {
               Header: "City",
               accessor: "City",
-              Cell: this.renderEditable
+              Cell: this.renderEditable,
+              minWidth: 150
             },
             {
               Header: "Postal",
@@ -79,55 +86,65 @@ export default class Grid extends Component {
             {
               Header: "Country",
               accessor: "Country",
-              Cell: this.renderEditable
+              Cell: this.renderEditable,
+              minWidth: 130
             },
             {
               Header: "Company",
               accessor: "Company",
-              Cell: this.renderEditable
+              Cell: this.renderEditable,
+              minWidth: 270
             },
             {
               Header: "Email",
               accessor: "Email",
-              Cell: this.renderEditable
+              Cell: this.renderEditable,
+              minWidth: 325
             },
             {
               Header: "Phone",
               accessor: "Phone",
-              Cell: this.renderEditable
+              Cell: this.renderEditable,
+              minWidth: 135
             },
             {
               Header: "Gender",
               accessor: "Gender",
-              Cell: this.renderEditable
+              Cell: this.renderEditable,
+              minWidth: 70
             },
             {
               Header: "Industry",
               accessor: "Industry",
-              Cell: this.renderEditable
+              Cell: this.renderEditable,
+              minWidth: 720
             },
             {
               Header: "WinChance",
               accessor: "WinChance",
-              Cell: this.renderEditable
+              Cell: this.renderEditable,
+              minWidth: 110 
             },
             {
               Header: "IsActive",
               accessor: "IsActive",
-              Cell: this.renderEditable
+              Cell: this.renderEditable,
+              minWidth: 70
             },
             {
               Header: "Amount",
               accessor: "Amount",
-              Cell: this.renderEditable
+              Cell: this.renderEditable,
+              minWidth: 80
             },
             {
               Header: "Currency",
               accessor: "Currency",
-              Cell: this.renderEditable
+              Cell: this.renderEditable,
+              minWidth: 80
             }
           ]}
-          defaultPageSize={data.length}
+          defaultPageSize={23}
           className="-striped -highlight"
         />
       </div>
