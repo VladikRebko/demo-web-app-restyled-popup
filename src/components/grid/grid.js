@@ -144,7 +144,7 @@ export default class Grid extends Component {
               minWidth: 80
             }
           ]}
-          defaultPageSize={23}
+          defaultPageSize={22}
           className="-striped -highlight"
         />
       </div>
