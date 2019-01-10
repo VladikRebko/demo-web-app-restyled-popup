@@ -37,18 +37,18 @@ export default class Login extends Component {
           validate={this._validate}
           render={({ handleSubmit, submitting, pristine }) => (
             <form onSubmit={handleSubmit}>
-              <div>
-                <label>Username</label>
+              <div className= 'input-field-container'>
                 <Field
+                  className = 'input-field'
                   name="username"
                   component={TextField}
                   type="text"
                   label="Username"
                 />
               </div>
-              <div>
-                <label>Password</label>
+              <div className= 'input-field-container'>
                 <Field
+                  className = 'input-field'
                   name="password"
                   component={TextField}
                   type="text"
@@ -56,7 +56,8 @@ export default class Login extends Component {
                 />
               </div>
               <div className="buttons">
-                <Button 
+                <Button
+                  className = 'submit-button' 
                   type="submit" 
                   disabled={submitting || pristine} 
                   variant="contained" 
