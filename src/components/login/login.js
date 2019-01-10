@@ -2,27 +2,20 @@ import React, { Component } from "react";
 import { Form, Field } from "react-final-form";
 import TextField from "./textField";
 import Button from '@material-ui/core/Button';
-
-import { Link } from 'react-router-dom';
+import { history } from '../app'
 
 import './login.css';
-
-let href = <Link to="/"></Link>;
 
 export default class Login extends Component {
 
   _onSubmit = values => {
-    if( values.username === "admin" && values.password === "admin" ){
-      href = (<Link to="/grid"></Link>);
+    if (values.username === 'admin' && values.password === 'admin'){
+      history.replace('/grid');
     }
   };
   
   _validate = values => {
     const errors = {};
-    
-    // if( values.username === "admin" && values.password === "admin" ){
-    //   href = <Link to="/grid"></Link>;
-    // };
     
     if (!values.username) {
       errors.username = "Required";
@@ -68,8 +61,8 @@ export default class Login extends Component {
                   disabled={submitting || pristine} 
                   variant="contained" 
                   color="primary">
-                  <Link to="/grid">Login</Link>
-                </Button>
+                  Log in
+                  </Button>
               </div>
             </form>
           )}
