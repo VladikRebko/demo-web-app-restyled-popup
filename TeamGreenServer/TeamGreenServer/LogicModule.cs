@@ -39,18 +39,18 @@ namespace TeamGreenApp
                     var response = new OwinResponse(env);
 
                     //обработка запросов
-                    if (request.QueryString.Equals("name=admin&password=admin", StringComparison.OrdinalIgnoreCase))
+                    /*if (request.QueryString.Equals("name=admin&password=admin", StringComparison.OrdinalIgnoreCase))
                     {
                         response.ContentType = "text/html; charset=utf-8";
                         return response.WriteAsync("<script>location.replace(\"/grid\");</script>");
-                    }
+                    }*/
 
                     response.ContentType = "text/html; charset=utf-8";
-                    return response.WriteAsync(ReadHtmlFile("main"));
+                    return response.WriteAsync(ReadHtmlFile("index"));
                 }
 
                 //// Grid page
-                if (path.Equals("/grid", StringComparison.OrdinalIgnoreCase))
+                /*if (path.Equals("/grid", StringComparison.OrdinalIgnoreCase))
                 {
                     var response = new OwinResponse(env);
 
@@ -68,7 +68,7 @@ namespace TeamGreenApp
 
                     response.ContentType = "text/html; charset=utf-8";
                     return response.WriteAsync(ReadHtmlFile("grid"));
-                }
+                }*/
             }
             catch (Exception ex)
             {
