@@ -24,3 +24,4 @@ yarn-error.log*
 /TeamGreenServer/packages
 /TeamGreenServer/TeamGreenServer/bin/Debug
 /TeamGreenServer/TeamGreenServer/obj/Debug
+/TeamGreenServer/TeamGreenServer/.bin
