@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import data from './LeadsData.js';
+import PopupForGridRow from '../popup'
+import { connect } from 'react-redux';
 
 // Import React Table
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
-export default class Grid extends Component {
+class Grid extends Component {
+  
   state = {
     data: data
   }
@@ -17,6 +20,7 @@ export default class Grid extends Component {
         style={{ backgroundColor: "#fafafa" }}
         suppressContentEditableWarning
         onClick={e => {
+          
           const data = [...this.state.data];
           data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
           this.setState({ data });
@@ -34,6 +38,7 @@ export default class Grid extends Component {
       <div>
         <ReactTable
           data={data}
+          pageSizeOptions= {[23, 25, 50]}
           columns={[
             {
               Header: "Company",
@@ -78,10 +83,19 @@ export default class Grid extends Component {
               minWidth: 110 
             }
           ]}
-          defaultPageSize={22}
+          defaultPageSize={23}
           className="-striped -highlight"
         />
       </div>
     );
   }
 }
+
+
+function mapStateToProps(state) {
+  return {
+    default: state[0].ID
+  };
+}
+
+export default connect(mapStateToProps)(Grid);

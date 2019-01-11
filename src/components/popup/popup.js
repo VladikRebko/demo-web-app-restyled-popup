@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import Popup from 'react-popup';
 
-export default class Popup extends Component{
+export default class PopupForGridRow extends Component{
 
   render(){
     return( 
-      <div>
-        Popup
-      </div>
+      <Popup />
     );
   }
 }
