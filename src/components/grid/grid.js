@@ -15,7 +15,6 @@ export default class Grid extends Component {
     return (
       <div
         style={{ backgroundColor: "#fafafa" }}
-        contentEditable
         suppressContentEditableWarning
         onClick={e => {
           const data = [...this.state.data];

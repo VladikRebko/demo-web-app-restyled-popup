@@ -1,12 +1,31 @@
 import React, { Component } from 'react';
-import Login from '../login';
-import Grid from '../grid'
+import { Router , Route } from 'react-router-dom';
 
-export default class App extends Component{
+import createBrowserHistory from "history/createBrowserHistory";
+
+import Login from '../login';
+import Grid from '../grid';
+
+const history = createBrowserHistory({
+  basename: '/'
+});
+
+class App extends Component{
     
   render(){
     return ( 
-      <Grid />
+      <Router history={history}>
+        <div className='demo-web-app' >
+          
+          <Route path="/" exact component={Login}/>
+          <Route path="/grid" component={Grid}/>
+
+        </div>
+      </Router>
     );
   }
+};
+
+export {
+  App, history
 };

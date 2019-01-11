@@ -2,19 +2,21 @@ import React, { Component } from "react";
 import { Form, Field } from "react-final-form";
 import TextField from "./textField";
 import Button from '@material-ui/core/Button';
+import { history } from '../app'
 
 import './login.css';
 
 export default class Login extends Component {
-  
+
   _onSubmit = values => {
-    if( values.username === "admin" && values.password === "admin" ){
-      console.log('redirect on table page');
+    if (values.username === 'admin' && values.password === 'admin'){
+      history.replace('/grid');
     }
   };
   
   _validate = values => {
     const errors = {};
+    
     if (!values.username) {
       errors.username = "Required";
     };
@@ -35,18 +37,18 @@ export default class Login extends Component {
           validate={this._validate}
           render={({ handleSubmit, submitting, pristine }) => (
             <form onSubmit={handleSubmit}>
-              <div>
-                <label>Username</label>
+              <div className= 'input-field-container'>
                 <Field
+                  className = 'input-field'
                   name="username"
                   component={TextField}
                   type="text"
                   label="Username"
                 />
               </div>
-              <div>
-                <label>Password</label>
+              <div className= 'input-field-container'>
                 <Field
+                  className = 'input-field'
                   name="password"
                   component={TextField}
                   type="text"
@@ -54,9 +56,14 @@ export default class Login extends Component {
                 />
               </div>
               <div className="buttons">
-                <Button type="submit" disabled={submitting || pristine} variant="contained" color="primary">
-                  Submit
-                </Button>
+                <Button
+                  className = 'submit-button' 
+                  type="submit" 
+                  disabled={submitting || pristine} 
+                  variant="contained" 
+                  color="primary">
+                  Log in
+                  </Button>
               </div>
             </form>
           )}

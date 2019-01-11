@@ -1,3 +1,3 @@
-import App from './app';
+import { App, history } from './app';
 
-export default App;
+export { App, history };
