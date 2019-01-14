@@ -41,9 +41,9 @@ class TablePopup extends Component {
 										<div className='popup-content'>
 											<form className='form-for-popup' onSubmit={handleSubmit}>
 												<div className='edit-fields'>
-													<div className='fileds-container'>
+													<div className='fields-container'>
 														<div className= 'input-field-container'>
-															<label>Last Name</label>
+															<label className='left-labels'>Last Name</label>
 															<Field
 																className = 'input-field'
 																name="lastName"
@@ -94,7 +94,7 @@ class TablePopup extends Component {
 														</div>
 														<div className= 'input-field-container'>
 															<label>Country</label>
-															<Field name="country" component="select">
+															<Field className = 'input-field' name="country" component="select">
 																<option />
 																<option value="#ff0000">Belarus</option>
 																<option value="#00ff00">Russia</option>
@@ -103,9 +103,10 @@ class TablePopup extends Component {
 														</div>
 														<div className= 'input-field-container'>
 															<label>Gender</label>
-															<div>
+															<div className='input-field gender-checkboxes'>
 																<label>
 																	<Field
+																		className = 'input-field'
 																		name="stooge"
 																		component="input"
 																		type="radio"
@@ -115,6 +116,7 @@ class TablePopup extends Component {
 																</label>
 																<label>
 																	<Field
+																		className = 'input-field'
 																		name="stooge"
 																		component="input"
 																		type="radio"
@@ -124,6 +126,7 @@ class TablePopup extends Component {
 																</label>
 																<label>
 																	<Field
+																		className = 'input-field'
 																		name="stooge"
 																		component="input"
 																		type="radio"
@@ -134,10 +137,10 @@ class TablePopup extends Component {
 															</div>
 														</div>
 													</div>
-													<div className='fileds-container'>
+													<div className='fields-container'>
 														<div className= 'input-field-container-for-right-side-toppings'>
-															<label>Toppings</label>
-															<Field name="toppings" component="select" multiple>
+															<label className='toppings-label'>Toppings</label>
+															<Field className = 'input-field' name="toppings" component="select" multiple>
 																<option value="chicken">Accounting</option>
 																<option value="ham">Airlines</option>
 																<option value="mushrooms">Aviation</option>
@@ -146,13 +149,14 @@ class TablePopup extends Component {
 															</Field>
 														</div>
 														<div className= 'input-field-container-for-right-side-win-chance'>
-															<label>Win chance</label>
+															<label className='win-chance-label'>Win chance</label>
 															<InputRange
+																className = 'input-field'
 																maxValue={100}
 																minValue={0} />
 														</div>
 														<div className= 'input-field-container-for-right-side-status'>
-															<label>Status</label>
+															<label className='status-label'>Status</label>
 															<Field className='checkbox' name="employed" component="input" type="checkbox" />
 														</div>
 													</div>	

@@ -10,7 +10,7 @@
     background-color: #ccc;
     margin:0px auto;
     padding:10px;
-    font-size:30px;
+    font-size: 23px;
 		color: #fff;
 		border-radius: 20px;
     box-shadow: 0px 0px 10px #000;
@@ -36,8 +36,6 @@
 .edit-fields{
 	display: flex;
 	flex-direction: row;
-	align-items: flex-start;
-	justify-content: space-around;
 }
 
 .popup-content {
@@ -55,7 +53,7 @@
 	box-shadow: 0px 0px 10px #000;
 }
 
-.fileds-container{
+.fields-container{
 	display: flex;
 	flex-direction: column;
 	margin: 0 50px;
@@ -63,16 +61,9 @@
 
 .input-field-container{
 	display: flex;
-	width: 450px;
+	border-radius: 1px; 
 	justify-content: space-between;
 	align-items: flex-start;
-}
-
-.input-field-container-for-right-side{
-	display: flex;
-	padding: 10px 0;
-	
-	align-items: center;
 }
 
 .input-field-container-for-right-side-toppings {
@@ -98,11 +89,38 @@
 .form-for-popup{
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: flex-end;
 }
 
 .buttons{
 	display: flex;
 	margin: 160px 50px 0 50px;
+}
+
+.win-chance-label{
+	width: 55%;
+}
+
+.status-label{
+	width: 35%;
+}
+
+.toppings-label{
+	width: 42%;
+}
+
+.gender-checkboxes{
+	display: flex;
+	font-size: 15px;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-right: 10px;
+}
+
+.left-labels{
+	width: 150px;
+}
+
+.input-field{
+	width: 50%;
 }
