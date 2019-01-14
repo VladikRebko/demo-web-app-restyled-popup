@@ -10,7 +10,7 @@ export default class Login extends Component {
 
   _onSubmit = values => {
     if (values.username === 'admin' && values.password === 'admin'){
-      history.replace('/grid');
+      history.push('/grid');
     }
   };
   

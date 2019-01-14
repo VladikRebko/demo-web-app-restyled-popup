@@ -1,3 +1,3 @@
-import PopupForGridRow from './popup';
+import TablePopup from './popup';
 
-export default PopupForGridRow;
+export default TablePopup;

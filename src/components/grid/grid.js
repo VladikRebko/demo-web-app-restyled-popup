@@ -1,43 +1,39 @@
 import React, { Component } from "react";
-import data from './LeadsData.js';
-import PopupForGridRow from '../popup'
+// import data from './LeadsData.js';
+import TablePopup from '../popup'
 import { connect } from 'react-redux';
+
+import { showPopup } from '../../redux/actions/popupActions/popupActions.js';
 
 // Import React Table
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
 class Grid extends Component {
-  
-  state = {
-    data: data
-  }
-
   renderEditable = (cellInfo) => {
-  
+    const { showPopup } = this.props;
+    const elementId = cellInfo.index + 1; //We add 1 because our json data begin from index: 1
+
     return (
       <div
         style={{ backgroundColor: "#fafafa" }}
-        suppressContentEditableWarning
         onClick={e => {
-          
-          const data = [...this.state.data];
-          data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-          this.setState({ data });
+          showPopup(true, elementId);
         }}
         dangerouslySetInnerHTML={{
-          __html: this.state.data[cellInfo.index][cellInfo.column.id]
+        	__html: this.props.tableData[cellInfo.index][cellInfo.column.id]
         }}
       />
     );
   };
 
   render() {
-    const { data } = this.state;
+    const { tableData } = this.props;
     return (
       <div>
+        <TablePopup />
         <ReactTable
-          data={data}
+          data={tableData}
           pageSizeOptions= {[23, 25, 50]}
           columns={[
             {
@@ -91,11 +87,7 @@ class Grid extends Component {
   }
 }
 
-
-function mapStateToProps(state) {
-  return {
-    default: state[0].ID
-  };
-}
-
-export default connect(mapStateToProps)(Grid);
+export default connect(
+    (state) => ({ tableData: state.tableReducer.tableData }),
+    { showPopup }
+)(Grid);

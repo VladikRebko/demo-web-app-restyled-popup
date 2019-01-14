@@ -4,19 +4,16 @@ import './index.css';
 import { App } from './components/app/index.js';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import data from './components/grid/LeadsData.js';
 
+import combinedReducers from './redux/reducers/index.js';
 
+const store = createStore(combinedReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-function reducer(state = [...data], action) {
-  return state;
-}
-
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-
+window.store=store;
 
 ReactDOM.render(
   <Provider  store={store}>
     <App />
   </Provider>, 
-  document.getElementById('root'));
+  document.getElementById('root')
+);
