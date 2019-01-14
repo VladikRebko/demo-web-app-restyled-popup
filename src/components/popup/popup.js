@@ -39,9 +39,9 @@ class TablePopup extends Component {
 								render = {(({handleSubmit}) => {
 									return(
 										<div className='popup-content'>
-											<form onSubmit={handleSubmit}>
+											<form className='form-for-popup' onSubmit={handleSubmit}>
 												<div className='edit-fields'>
-													<div className='left-side'>
+													<div className='fileds-container'>
 														<div className= 'input-field-container'>
 															<label>Last Name</label>
 															<Field
@@ -92,7 +92,7 @@ class TablePopup extends Component {
 																label="Company"
 															/>
 														</div>
-														<div>
+														<div className= 'input-field-container'>
 															<label>Country</label>
 															<Field name="country" component="select">
 																<option />
@@ -101,7 +101,7 @@ class TablePopup extends Component {
 																<option value="#0000ff">USA</option>
 															</Field>
 														</div>
-														<div>
+														<div className= 'input-field-container'>
 															<label>Gender</label>
 															<div>
 																<label>
@@ -134,8 +134,8 @@ class TablePopup extends Component {
 															</div>
 														</div>
 													</div>
-													<div className='right-side'>
-														<div>
+													<div className='fileds-container'>
+														<div className= 'input-field-container-for-right-side-toppings'>
 															<label>Toppings</label>
 															<Field name="toppings" component="select" multiple>
 																<option value="chicken">Accounting</option>
@@ -145,15 +145,15 @@ class TablePopup extends Component {
 																<option value="tuna">Alternative Dispute Resolution</option>
 															</Field>
 														</div>
-														<div>
+														<div className= 'input-field-container-for-right-side-win-chance'>
 															<label>Win chance</label>
 															<InputRange
 																maxValue={100}
 																minValue={0} />
 														</div>
-														<div>
+														<div className= 'input-field-container-for-right-side-status'>
 															<label>Status</label>
-															<Field name="employed" component="input" type="checkbox" />
+															<Field className='checkbox' name="employed" component="input" type="checkbox" />
 														</div>
 													</div>	
 												</div>
