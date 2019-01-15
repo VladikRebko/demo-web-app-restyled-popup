@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Form, Field } from "react-final-form";
 import TextField from "./textField";
 import Button from '@material-ui/core/Button';
-import { history } from '../app'
+import { history } from '../app';
 
 import './login.css';
 
@@ -36,24 +36,24 @@ export default class Login extends Component {
           onSubmit={this._onSubmit}
           validate={this._validate}
           render={({ handleSubmit, submitting, pristine }) => (
-            <form onSubmit={handleSubmit}>
-              <div className= 'input-field-container'>
-                <Field
-                  className = 'input-field'
-                  name="username"
-                  component={TextField}
-                  type="text"
-                  label="Username"
-                />
-              </div>
-              <div className= 'input-field-container'>
-                <Field
-                  className = 'input-field'
-                  name="password"
-                  component={TextField}
-                  type="text"
-                  label="Password"
-                />
+            <form className='login-form' onSubmit={handleSubmit}>
+              <div className= 'input-fields-container'>
+                <div className = 'input-login-field'> 
+                  <Field
+                    name="username"
+                    component={TextField}
+                    type="text"
+                    label="Username"
+                  />
+                </div>
+                <div className = 'input-login-field'>
+                  <Field
+                    name="password"
+                    component={TextField}
+                    type="text"
+                    label="Password"
+                  />
+                </div>
               </div>
               <div className="submit-buttons">
                 <Button
@@ -63,7 +63,7 @@ export default class Login extends Component {
                   variant="contained" 
                   color="primary">
                   Log in
-                  </Button>
+                </Button>
               </div>
             </form>
           )}

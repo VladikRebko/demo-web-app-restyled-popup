@@ -2,8 +2,7 @@ import React, { Component } from "react";
 // import data from './LeadsData.js';
 import TablePopup from '../popup'
 import { connect } from 'react-redux';
-
-import { showPopup } from '../../redux/actions/popupActions/popupActions.js';
+import { history } from '../app'
 
 // Import React Table
 import ReactTable from "react-table";
@@ -11,14 +10,13 @@ import "react-table/react-table.css";
 
 class Grid extends Component {
   renderEditable = (cellInfo) => {
-    const { showPopup } = this.props;
     const elementId = cellInfo.index + 1; //We add 1 because our json data begin from index: 1
 
     return (
       <div
         style={{ backgroundColor: "#fafafa" }}
         onClick={e => {
-          showPopup(true, elementId);
+          history.push('/popup');
         }}
         dangerouslySetInnerHTML={{
         	__html: this.props.tableData[cellInfo.index][cellInfo.column.id]
@@ -31,7 +29,6 @@ class Grid extends Component {
     const { tableData } = this.props;
     return (
       <div>
-        <TablePopup />
         <ReactTable
           data={tableData}
           pageSizeOptions= {[23, 25, 50]}
@@ -88,6 +85,5 @@ class Grid extends Component {
 }
 
 export default connect(
-    (state) => ({ tableData: state.tableReducer.tableData }),
-    { showPopup }
+    (state) => ({ tableData: state.tableReducer.tableData })
 )(Grid);
