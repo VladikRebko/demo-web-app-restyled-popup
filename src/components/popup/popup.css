@@ -12,7 +12,7 @@
     background-color: #ccc;
     margin:0px;
     padding:10px;
-    font-size: 23px;
+    font-size: 20px;
 		color: #fff;
 		border-radius: 20px;
     box-shadow: 0px 0px 10px #000;
@@ -39,8 +39,10 @@
 .form-for-popup{
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-end;
   width: 50vw;
-  height: 50vh;
+  height: 60vh;
 }
 
 .edit-fields{
@@ -49,13 +51,91 @@
   align-items: flex-start;
   color: #000000;
   width: 100%;
-  height: 100%;
+  height: 60vh;
 }
 
 .fields-container{
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   width: 100%;
   height: 100%;
+}
+
+.input-field-container-for-popup{
+  display: flex;
+  justify-content: flex-start;
   align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.label-for-fileld{
+  width: 150px;
+  padding: 20px 0 20px 0;
+  margin: 0px;
+}
+
+.field-wrapper{
+  display: flex;
+  font-size: 15px;
+  flex-direction: column;
+  width: 15vw;
+  height: 100%;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.field-gender-wrapper{
+  display: flex;
+  font-size: 15px;
+  flex-direction: column;
+  width: 15vw;
+  height: 100%;
   justify-content: space-between;
+  align-items: flex-start;
+}
+
+.label-for-gender-field{
+  margin: 0;
+}
+
+.input-field{
+  display: flex;
+  width: 70%;
+}
+
+.MuiFormControl-root-1{
+  display: flex;
+  width: 70%;
+}
+
+.field-wrapper .input-range{
+  display: flex;
+  width: 70%;
+}
+
+.field-wrapper select{
+  display: flex;
+  width: 70%;
+}
+
+.field-wrapper input{
+  display: flex;
+  width: auto;
+}
+
+.buttons-wrapper{
+  display: flex;
+  width: 100%;
+  height: 20%;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.buttons-container{
+  display: flex;
+  justify-content: flex-end;
+  height: 50%;
 }
