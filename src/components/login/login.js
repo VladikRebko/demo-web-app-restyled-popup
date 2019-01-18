@@ -37,7 +37,7 @@ export default class Login extends Component {
           validate={this._validate}
           render={({ handleSubmit, submitting, pristine }) => (
             <form className='login-form' onSubmit={handleSubmit}>
-              <div className= 'input-fields-container'>
+              <div className= 'input-fields-containere'>
                 <div className = 'input-login-field'> 
                   <Field
                     name="username"
@@ -50,7 +50,7 @@ export default class Login extends Component {
                   <Field
                     name="password"
                     component={TextField}
-                    type="text"
+                    type="password"
                     label="Password"
                   />
                 </div>

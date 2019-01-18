@@ -4,11 +4,18 @@ import { Form, Field } from "react-final-form";
 import TextField from "../login/textField";
 import Button from '@material-ui/core/Button';
 import InputRange from 'react-input-range';
+import Select from 'react-select';
+
+import {countries, industries } from './data';
 
 import { changeTableData } from '../../redux/actions/tableActions/tableActions.js';
 
 import './popup.css';
 import 'react-input-range/lib/css/index.css'
+
+const SelectAdapter = ({ input, ...rest }) => (
+  <Select {...input} {...rest} searchable />
+)
 
 class TablePopup extends Component {
 	
@@ -18,7 +25,11 @@ class TablePopup extends Component {
     return tableData.find(element => {
         return Number(element.ID) === Number(tableRowId);
     });
-  };
+	};
+
+	_onChoiceCountry = (values) =>{
+		console.log(values);
+	}
 
   render(){
 		const tableRowData = this._getTableElement();
@@ -101,12 +112,12 @@ class TablePopup extends Component {
 												<div className= 'input-field-container-for-popup'>
 													<label className='label-for-fileld'>Country</label>
 													<div className='field-wrapper'>
-														<Field className = 'input-field' name="country" component="select">
-															<option />
-															<option value="#ff0000">Belarus</option>
-															<option value="#00ff00">Russia</option>
-															<option value="#0000ff">USA</option>
-														</Field>
+														<Field 
+															name="country" 
+															component={SelectAdapter} 
+															options={countries}
+															onChange={this._onChoiceCountry}
+														/>
 													</div>
 												</div>
 
@@ -148,13 +159,12 @@ class TablePopup extends Component {
 												<div className='input-field-container-for-popup'>
 													<label className='label-for-fileld'>Industries</label>
 													<div className='field-wrapper'>
-														<Field name="toppings" component="select" multiple>
-															<option value="chicken">Accounting</option>
-															<option value="ham">Airlines</option>
-															<option value="mushrooms">Aviation</option>
-															<option value="cheese">Alternative Medicine</option>
-															<option value="tuna">Alternative Dispute Resolution</option>
-														</Field>
+														<Field 
+															name="industry" 
+															component={SelectAdapter} 
+															options={industries}
+															onChange={this._onChoiceCountry}
+														/>
 													</div>
 												</div>
 												<div className='input-field-container-for-popup'>
