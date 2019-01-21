@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 // import data from './LeadsData.js';
-import TablePopup from '../popup'
 import { connect } from 'react-redux';
 import { history } from '../app'
 
@@ -11,6 +10,8 @@ import "react-table/react-table.css";
 class Grid extends Component {
   renderEditable = (cellInfo) => {
     const elementId = cellInfo.index + 1; //We add 1 because our json data begin from index: 1
+
+    console.log(elementId);
 
     return (
       <div
@@ -27,6 +28,9 @@ class Grid extends Component {
 
   render() {
     const { tableData } = this.props;
+
+    // console.log(tableData);
+
     return (
       <div>
         <ReactTable
@@ -84,6 +88,10 @@ class Grid extends Component {
   }
 }
 
-export default connect(
-    (state) => ({ tableData: state.tableReducer.tableData })
-)(Grid);
+const mapStateToProps = (state) => {
+  return {
+    tableData: state.tableReducer.tableData
+  }
+}
+
+export default connect(mapStateToProps)(Grid);
