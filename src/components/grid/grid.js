@@ -3,21 +3,31 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { history } from '../app'
 
+import { setTableRow } from '../../redux/actions/tableActions/tableActions';
+
 // Import React Table
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
 class Grid extends Component {
+  
   renderEditable = (cellInfo) => {
     const elementId = cellInfo.index + 1; //We add 1 because our json data begin from index: 1
-
-    console.log(elementId);
+    const { setTableRow, tableData } = this.props;
+    
+    const tableCurrentRow = tableData.find(element => {
+      return Number(element.ID) === Number(elementId);
+    });
+    
+    // getTableRow(tableCurrentRow);
 
     return (
       <div
         style={{ backgroundColor: "#fafafa" }}
         onClick={e => {
           history.push('/popup');
+          setTableRow(tableCurrentRow);
+          console.log(setTableRow(tableCurrentRow));
         }}
         dangerouslySetInnerHTML={{
         	__html: this.props.tableData[cellInfo.index][cellInfo.column.id]
@@ -90,8 +100,14 @@ class Grid extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    tableData: state.tableReducer.tableData
+    tableData: state.tableReducer.tableData,
+    tableCurrentRow: state.tableReducer.tableCurrentRow
   }
 }
 
-export default connect(mapStateToProps)(Grid);
+export default connect(
+  mapStateToProps,
+  {
+    setTableRow
+  }
+  )(Grid);

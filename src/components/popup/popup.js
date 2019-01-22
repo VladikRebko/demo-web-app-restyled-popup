@@ -8,7 +8,7 @@ import Select from 'react-select';
 
 import {countries, industries } from './data';
 
-import { changeTableData } from '../../redux/actions/tableActions/tableActions.js';
+import { changeTableData } from '../../redux/actions/popupActions/popupActions';
 
 import './popup.css';
 import 'react-input-range/lib/css/index.css'
@@ -18,33 +18,29 @@ const SelectAdapter = ({ input, ...rest }) => (
 )
 
 class TablePopup extends Component {
-	
-	_getTableElement = () => {
-    const { tableRowId, tableData } = this.props;
-
-    return tableData.find(element => {
-        return Number(element.ID) === Number(tableRowId);
-    });
-	};
 
 	_onChoiceCountry = (values) =>{
 		console.log(values);
 	}
 
-  render(){
-		const tableRowData = this._getTableElement();
-    // isOpen && console.log(this.getTableElement());
+	_onSubmit = (values) =>{
+		console.log(values);
+	}
 
+  render(){
+
+		const { tableCurrentRow, tableData } = this.props;
+		console.log(tableCurrentRow, tableData);
+		
     return(
 
 			<div className={'show-popup'}>
 				<div className={'popup-wrapper'}>
 					<Form
 						onSubmit={this._onSubmit}
-						initialValues={this._getTableElement()}
+						initialValues={tableCurrentRow}
 						render = { ({handleSubmit}) => {
 							return(
-								<div className='popup-content'>
 									<form className='form-for-popup' onSubmit={handleSubmit}>
 										<div className='edit-fields'>
 											<div className='fields-container'>
@@ -53,7 +49,7 @@ class TablePopup extends Component {
 													<label className='label-for-fileld'>Last Name</label>
 													<div className='field-wrapper'>
 														<Field
-															name="lastName"
+															name="LastName"
 															component={TextField}
 															type="text"
 															label="Last Name"
@@ -65,7 +61,7 @@ class TablePopup extends Component {
 													<label className='label-for-fileld'>First Name</label>
 													<div className='field-wrapper'>
 														<Field
-															name="firstName"
+															name="FirstName"
 															component={TextField}
 															type="text"
 															label="First Name"
@@ -77,7 +73,7 @@ class TablePopup extends Component {
 													<label className='label-for-fileld'>Email</label>
 													<div className='field-wrapper'>
 														<Field
-															name="email"
+															name="Email"
 															component={TextField}
 															type="text"
 															label="Email"
@@ -89,7 +85,7 @@ class TablePopup extends Component {
 													<label className='label-for-fileld'>Phone</label>
 													<div className='field-wrapper'>
 														<Field
-															name="phone"
+															name="Phone"
 															component={TextField}
 															type="text"
 															label="Phone"
@@ -101,7 +97,7 @@ class TablePopup extends Component {
 													<label className='label-for-fileld'>Company</label>
 													<div className='field-wrapper'>
 														<Field
-															name="company"
+															name="Company"
 															component={TextField}
 															type="text"
 															label="Company"
@@ -113,7 +109,7 @@ class TablePopup extends Component {
 													<label className='label-for-fileld'>Country</label>
 													<div className='field-wrapper'>
 														<Field 
-															name="country" 
+															name="Country" 
 															component={SelectAdapter} 
 															options={countries}
 															onChange={this._onChoiceCountry}
@@ -126,28 +122,28 @@ class TablePopup extends Component {
 													<div className='field-gender-wrapper'>
 															<label className='label-for-gender-field'>
 																	<Field
-																		name="stooge"
+																		name="Stooge"
 																		component="input"
 																		type="radio"
-																		value="larry"
+																		value="female"
 																	/>{' '}
 																	Female
 															</label>
 															<label className='label-for-gender-field'>
 																	<Field
-																		name="stooge"
+																		name="Stooge"
 																		component="input"
 																		type="radio"
-																		value="moe"
+																		value="male"
 																	/>{' '}
 																	Male
 															</label>
 															<label className='label-for-gender-field'>
 																	<Field
-																		name="stooge"
+																		name="Stooge"
 																		component="input"
 																		type="radio"
-																		value="curly"
+																		value="other"
 																	/>{' '}
 																	Other
 															</label>
@@ -160,7 +156,7 @@ class TablePopup extends Component {
 													<label className='label-for-fileld'>Industries</label>
 													<div className='field-wrapper'>
 														<Field 
-															name="industry" 
+															name="Industry" 
 															component={SelectAdapter} 
 															options={industries}
 															onChange={this._onChoiceCountry}
@@ -171,14 +167,23 @@ class TablePopup extends Component {
 													<label className='label-for-fileld'>Win chance</label>
 													<div className='field-wrapper'>
 														<InputRange
+															name="WinChance"
+															onChange={() =>{return 1}}
 															maxValue={100}
-															minValue={0} />
+															minValue={0} 
+															value={ Number(tableCurrentRow.WinChance) }
+															/>
 													</div>
 												</div>
 												<div className='input-field-container-for-popup'>
 													<label className='label-for-fileld'>Status</label>
 													<div className='field-wrapper'>
-														<Field name="employed" component="input" type="checkbox" />
+														<Field 
+															name="Employed" 
+															component="input" 
+															type="checkbox"
+															value
+														/>
 														<label>is active</label>
 													</div>
 												</div>
@@ -204,7 +209,6 @@ class TablePopup extends Component {
 											</div>
 										</div>
 									</form>
-								</div>
 							)
 						}}
 					/>
@@ -214,12 +218,16 @@ class TablePopup extends Component {
 	}
 }
 
+const mapStateToProps = (state) => {
+	return {
+		tableData: state.tableReducer.tableData,
+		tableCurrentRow: state.tableReducer.tableCurrentRow
+	}
+}
+
 export default connect(
-  (state) => ({
-    tableRowId: state.tableReducer.tableRowId,
-    tableData: state.tableReducer.tableData
-  }),
+  mapStateToProps,
   {
-    changeTableData
+		changeTableData
   }
 )(TablePopup);

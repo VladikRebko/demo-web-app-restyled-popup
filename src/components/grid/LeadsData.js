@@ -15,7 +15,7 @@
     "Gender": "Male",
     "Industry": [ "Architecture/Planning" ],
     "WinChance": "45",
-    "IsActive": "TRUE",
+    "IsActive": true,
     "Amount": "24560",
     "Currency": "USD"
   },

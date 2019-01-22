@@ -1,28 +1,30 @@
-import { OPEN_POPUP } from '../../actions/popupActions/popupActions';
-import data from '../../../components/grid/LeadsData.js';
+import { CHANGE_TABLE_DATA } from '../../actions/popupActions/popupActions.js';
 
 const initialState = {
-  tableData: [ ...data ]
+  tableCurrentRow: null
 };
 
-const openPopup = ( state = initialState, action ) => {
+const popupReducer = ( state = initialState, action ) => {
   const { type, payload } = action;
 
 	switch (type) {
-    case OPEN_POPUP: {
-      const { tableElement } = payload;
+
+    case CHANGE_TABLE_DATA: {
+      const { tableCurrentRow } = payload;
 
       return {
-        tableData: state.tableData.map(element => element['ID'] === tableElement['ID']
-          ? tableElement
+        ...state,
+        tableData: state.tableData.map(element => element['ID'] === tableCurrentRow['ID']
+          ? tableCurrentRow
           : element
         )
       }
     }
+
     default: {
       return state;
     }
   }
 };
 
-export default openPopup;
+export default popupReducer;

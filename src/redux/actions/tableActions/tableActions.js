@@ -1,8 +1,8 @@
-export const CHANGE_TABLE_DATA = 'CHANGE_TABLE_DATA';
+export const SET_TABLE_ROW = 'SET_TABLE_ROW';
 
-export const changeTableData = (tableElement) => ({
-  type: CHANGE_TABLE_DATA,
+export const setTableRow = (tableCurrentRow) => ({
+  type: SET_TABLE_ROW,
   payload: {
-    tableElement
+    tableCurrentRow
   }
 });

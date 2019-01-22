@@ -1,8 +1,8 @@
-export const OPEN_POPUP = 'OPEN_POPUP';
+export const CHANGE_TABLE_DATA = 'CHANGE_TABLE_DATA';
 
-export const changeTableData = (tableElement) => ({
-  type: OPEN_POPUP,
+export const changeTableData = (tableCurrentRow) => ({
+  type: CHANGE_TABLE_DATA,
   payload: {
-    tableElement
+    tableCurrentRow
   }
 });

@@ -1,29 +1,29 @@
-import { CHANGE_TABLE_DATA } from '../../actions/tableActions/tableActions.js';
+import { SET_TABLE_ROW } from '../../actions/tableActions/tableActions.js';
 import data from '../../../components/grid/LeadsData.js';
 
 const initialState = {
-  tableData: [ ...data ]
+  tableData: [ ...data ],
+  tableCurrentRow: data[1]
 };
 
-const popupTable = ( state = initialState, action ) => {
+const tableReducer = ( state = initialState, action ) => {
   const { type, payload } = action;
 
 	switch (type) {
-    case CHANGE_TABLE_DATA: {
-      const { tableElement } = payload;
+
+    case SET_TABLE_ROW: {
+      const { tableCurrentRow } = payload;
 
       return {
         ...state,
-        tableData: state.tableData.map(element => element['ID'] === tableElement['ID']
-          ? tableElement
-          : element
-        )
+        tableCurrentRow
       }
     }
+
     default: {
       return state;
     }
   }
 };
 
-export default popupTable;
+export default tableReducer;
