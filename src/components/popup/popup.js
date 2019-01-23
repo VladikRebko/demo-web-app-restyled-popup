@@ -270,7 +270,7 @@ class TablePopup extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		tableData: state.tableReducer.tableData,
+		tableData: state.popupReducer.newTableData,
 		tableCurrentRow: state.tableReducer.tableCurrentRow
 	}
 }
