@@ -12,6 +12,7 @@ const tableReducer = ( state = initialState, action ) => {
 	switch (type) {
 
     case SET_TABLE_ROW: {
+      
       const { tableCurrentRow } = payload;
 
       return {

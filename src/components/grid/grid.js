@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import data from './LeadsData.js';
 import { connect } from 'react-redux';
-import { history } from '../app'
+import { history } from '../app';
 
 import { setTableRow } from '../../redux/actions/tableActions/tableActions';
 
@@ -16,10 +16,9 @@ class Grid extends Component {
     const { setTableRow, tableData } = this.props;
     
     const tableCurrentRow = tableData.find(element => {
+      
       return Number(element.ID) === Number(elementId);
     });
-    
-    // getTableRow(tableCurrentRow);
 
     return (
       <div
@@ -27,7 +26,6 @@ class Grid extends Component {
         onClick={e => {
           history.push('/popup');
           setTableRow(tableCurrentRow);
-          console.log(setTableRow(tableCurrentRow));
         }}
         dangerouslySetInnerHTML={{
         	__html: this.props.tableData[cellInfo.index][cellInfo.column.id]
@@ -100,7 +98,7 @@ class Grid extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    tableData: state.tableReducer.tableData,
+    tableData: state.popupReducer.newTableData,
     tableCurrentRow: state.tableReducer.tableCurrentRow
   }
 }

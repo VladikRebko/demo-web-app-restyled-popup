@@ -1,7 +1,8 @@
 import { CHANGE_TABLE_DATA } from '../../actions/popupActions/popupActions.js';
+import data from '../../../components/grid/LeadsData.js';
 
 const initialState = {
-  tableCurrentRow: null
+  newTableData: [ ...data ]
 };
 
 const popupReducer = ( state = initialState, action ) => {
@@ -10,15 +11,12 @@ const popupReducer = ( state = initialState, action ) => {
 	switch (type) {
 
     case CHANGE_TABLE_DATA: {
-      const { tableCurrentRow } = payload;
+      const { newTableData } = payload;
 
       return {
         ...state,
-        tableData: state.tableData.map(element => element['ID'] === tableCurrentRow['ID']
-          ? tableCurrentRow
-          : element
-        )
-      }
+        newTableData
+      };
     }
 
     default: {

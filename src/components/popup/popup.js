@@ -5,6 +5,7 @@ import TextField from "../login/textField";
 import Button from '@material-ui/core/Button';
 import InputRange from 'react-input-range';
 import Select from 'react-select';
+import { history } from '../app';
 
 import {countries, industries } from './data';
 
@@ -13,24 +14,70 @@ import { changeTableData } from '../../redux/actions/popupActions/popupActions';
 import './popup.css';
 import 'react-input-range/lib/css/index.css'
 
-const SelectAdapter = ({ input, ...rest }) => (
-  <Select {...input} {...rest} searchable />
-)
-
 class TablePopup extends Component {
 
-	_onChoiceCountry = (values) =>{
-		console.log(values);
+	_getWinChanceValue = () =>{
+		const { tableCurrentRow } = this.props;
+		return tableCurrentRow.WinChance;
+	};
+
+	_getIndustryValue = () =>{
+		const { tableCurrentRow } = this.props;
+		return tableCurrentRow.Industry;
+	};
+
+	_getCountryValue = () =>{
+		const { tableCurrentRow } = this.props;
+		return tableCurrentRow.Country;
+	};
+
+	state = {
+		valueOfWinChance: this._getWinChanceValue() - 1 + 1,
+		selectedCountry: {
+			label:this._getCountryValue()
+		},
+		selectedIndustry: {
+			label: this._getIndustryValue()
+		}
+	};
+
+	_handleChangeCountry = (selectedCountry) => {
+		this.setState( () =>{ return{selectedCountry} });
 	}
 
+	_handleChangeIndustry = (selectedIndustry) => {
+    this.setState(() =>{ return{selectedIndustry}});
+  }
+
 	_onSubmit = (values) =>{
-		console.log(values);
-	}
+
+		const { tableData, changeTableData } = this.props;
+
+		if( values.IsActive ){
+			values.IsActive = "TRUE";
+		}
+		else values.IsActive = "FALSE";
+
+		values.WinChance = this.state.valueOfWinChance + '';
+		values.Country = this.state.selectedCountry.label;
+		values.Industry = this.state.selectedIndustry.label;		
+
+		const newTableData = tableData.map(element => element['ID'] === values['ID']
+			? values
+			: element
+		);
+	changeTableData(newTableData);
+	history.goBack();
+	};
 
   render(){
 
-		const { tableCurrentRow, tableData } = this.props;
-		console.log(tableCurrentRow, tableData);
+		const { selectedCountry, selectedIndustry } = this.state;
+		const { tableCurrentRow } = this.props;
+		if( tableCurrentRow.IsActive === "TRUE" ){
+			tableCurrentRow.IsActive = true;
+		}
+		else tableCurrentRow.IsActive = false;
 		
     return(
 
@@ -109,10 +156,12 @@ class TablePopup extends Component {
 													<label className='label-for-fileld'>Country</label>
 													<div className='field-wrapper'>
 														<Field 
-															name="Country" 
-															component={SelectAdapter} 
+															name= "Country"
+															defaultInputValue= {tableCurrentRow.Country}
+															onChange= {this._handleChangeCountry}
+															component={Select} 
 															options={countries}
-															onChange={this._onChoiceCountry}
+															value= {selectedCountry}
 														/>
 													</div>
 												</div>
@@ -122,28 +171,28 @@ class TablePopup extends Component {
 													<div className='field-gender-wrapper'>
 															<label className='label-for-gender-field'>
 																	<Field
-																		name="Stooge"
+																		name="Gender"
 																		component="input"
 																		type="radio"
-																		value="female"
+																		value="Female"
 																	/>{' '}
 																	Female
 															</label>
 															<label className='label-for-gender-field'>
 																	<Field
-																		name="Stooge"
+																		name="Gender"
 																		component="input"
 																		type="radio"
-																		value="male"
+																		value="Male"
 																	/>{' '}
 																	Male
 															</label>
 															<label className='label-for-gender-field'>
 																	<Field
-																		name="Stooge"
+																		name="Gender"
 																		component="input"
 																		type="radio"
-																		value="other"
+																		value="Other"
 																	/>{' '}
 																	Other
 															</label>
@@ -156,10 +205,12 @@ class TablePopup extends Component {
 													<label className='label-for-fileld'>Industries</label>
 													<div className='field-wrapper'>
 														<Field 
-															name="Industry" 
-															component={SelectAdapter} 
+															name="Industry"
+															component={Select} 
+															onChange= {this._handleChangeIndustry}
+															defaultInputValue= {tableCurrentRow.Industry[0]}
 															options={industries}
-															onChange={this._onChoiceCountry}
+															value = {selectedIndustry}
 														/>
 													</div>
 												</div>
@@ -168,10 +219,10 @@ class TablePopup extends Component {
 													<div className='field-wrapper'>
 														<InputRange
 															name="WinChance"
-															onChange={() =>{return 1}}
+															onChange={ valueOfWinChance => this.setState({ valueOfWinChance }) }
 															maxValue={100}
-															minValue={0} 
-															value={ Number(tableCurrentRow.WinChance) }
+															minValue={0} 	
+															value={this.state.valueOfWinChance}
 															/>
 													</div>
 												</div>
@@ -179,10 +230,9 @@ class TablePopup extends Component {
 													<label className='label-for-fileld'>Status</label>
 													<div className='field-wrapper'>
 														<Field 
-															name="Employed" 
+															name= "IsActive" 
 															component="input" 
 															type="checkbox"
-															value
 														/>
 														<label>is active</label>
 													</div>
@@ -193,16 +243,16 @@ class TablePopup extends Component {
 										<div className='buttons-wrapper'>
 											<div className='buttons-container'>
 												<Button
-													className = 'submit-button'
-													type="submit"
-													variant="contained"
-													color="primary">
+													onClick={ () => { history.goBack() } }
+													color="secondary"
+													size="large"
+													variant="outlined">
 														Close
 												</Button>
 												<Button
-													className = 'submit-button'
 													type="submit"
-													variant="contained"
+													size="large"
+													variant="outlined"
 													color="primary">
 													Save
 												</Button>
