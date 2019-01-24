@@ -2,7 +2,7 @@ import { CHANGE_TABLE_DATA } from '../../actions/popupActions/popupActions.js';
 import data from '../../../components/grid/LeadsData.js';
 
 const initialState = {
-  newTableData: [ ...data ]
+  tableData: [ ...data ]
 };
 
 const popupReducer = ( state = initialState, action ) => {
@@ -14,8 +14,7 @@ const popupReducer = ( state = initialState, action ) => {
       const { newTableData } = payload;
 
       return {
-        ...state,
-        newTableData
+        tableData: newTableData
       };
     }
 

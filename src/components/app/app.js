@@ -22,7 +22,14 @@ class App extends Component{
           
           <Route path="/" exact component={Login}/>
           <Route path="/grid" component={Grid}/>
-          <Route path="/popup" component={TablePopup}/>
+          <Route path="/popup" exact component={TablePopup}/>
+          {/* <Route path="/popup/:id" 
+                 render= { ({ match }) =>{
+
+                  const { id } = match.params;
+                  //  console.log( match );
+                   return( <TablePopup itemId={id}/> )
+                  }}/> */}
 
         </div>
       </Router>

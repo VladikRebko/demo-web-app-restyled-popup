@@ -1,9 +1,7 @@
-import { SET_TABLE_ROW } from '../../actions/tableActions/tableActions.js';
-import data from '../../../components/grid/LeadsData.js';
+import { SET_ID_OF_TABLE_ROW } from '../../actions/tableActions/tableActions.js';
 
 const initialState = {
-  tableData: [ ...data ],
-  tableCurrentRow: data[1]
+  idOfTableRow: '1'
 };
 
 const tableReducer = ( state = initialState, action ) => {
@@ -11,13 +9,12 @@ const tableReducer = ( state = initialState, action ) => {
 
 	switch (type) {
 
-    case SET_TABLE_ROW: {
+    case SET_ID_OF_TABLE_ROW: {
       
-      const { tableCurrentRow } = payload;
+      const { idOfTableRow } = payload;
 
       return {
-        ...state,
-        tableCurrentRow
+        idOfTableRow
       }
     }
 

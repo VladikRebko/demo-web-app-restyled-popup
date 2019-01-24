@@ -7,7 +7,7 @@ import InputRange from 'react-input-range';
 import Select from 'react-select';
 import { history } from '../app';
 
-import {countries, industries } from './data';
+import {countries, industries, currency } from './data';
 
 import { changeTableData } from '../../redux/actions/popupActions/popupActions';
 
@@ -16,28 +16,32 @@ import 'react-input-range/lib/css/index.css'
 
 class TablePopup extends Component {
 
-	_getWinChanceValue = () =>{
-		const { tableCurrentRow } = this.props;
-		return tableCurrentRow.WinChance;
+	_getTableDataRow = () => {
+
+		const { tableData, idOfTableRow } = this.props;
+
+		const tableCurrentRow = tableData.find(element => {
+			return Number(element.ID) === Number(idOfTableRow);
+	 });
+
+	 return tableCurrentRow;
 	};
 
-	_getIndustryValue = () =>{
-		const { tableCurrentRow } = this.props;
-		return tableCurrentRow.Industry;
-	};
+	_getDataForField = (nameOfData) =>{
 
-	_getCountryValue = () =>{
-		const { tableCurrentRow } = this.props;
-		return tableCurrentRow.Country;
+		return this._getTableDataRow()[nameOfData];
 	};
 
 	state = {
-		valueOfWinChance: this._getWinChanceValue() - 1 + 1,
+		valueOfWinChance: this._getDataForField("WinChance") - 1 + 1,
 		selectedCountry: {
-			label:this._getCountryValue()
+			label:this._getDataForField("Country")
 		},
 		selectedIndustry: {
-			label: this._getIndustryValue()
+			label: this._getDataForField("Industry")
+		},
+		selectedCurrency: {
+			label: this._getDataForField("Currency")
 		}
 	};
 
@@ -47,11 +51,17 @@ class TablePopup extends Component {
 
 	_handleChangeIndustry = (selectedIndustry) => {
     this.setState(() =>{ return{selectedIndustry}});
-  }
+	}
+	
+	_handleChangeCurrency = (selectedCurrency) => {
+		this.setState( () =>{ return{selectedCurrency} });
+	}
 
 	_onSubmit = (values) =>{
 
-		const { tableData, changeTableData } = this.props;
+		const { tableData, changeTableData, idOfTableRow } = this.props;
+
+		console.log(tableData, idOfTableRow);
 
 		if( values.IsActive ){
 			values.IsActive = "TRUE";
@@ -61,19 +71,26 @@ class TablePopup extends Component {
 		values.WinChance = this.state.valueOfWinChance + '';
 		values.Country = this.state.selectedCountry.label;
 		values.Industry = this.state.selectedIndustry.label;		
+		values.Currency = this.state.selectedCurrency.label;
 
+		console.log(values.Currency)
 		const newTableData = tableData.map(element => element['ID'] === values['ID']
 			? values
 			: element
 		);
-	changeTableData(newTableData);
-	history.goBack();
+
+		changeTableData(newTableData);
+		history.goBack();
 	};
 
   render(){
 
-		const { selectedCountry, selectedIndustry } = this.state;
-		const { tableCurrentRow } = this.props;
+		const { selectedCountry, selectedIndustry, selectedCurrency } = this.state;
+
+		const tableCurrentRow = this._getTableDataRow();
+
+		console.log(tableCurrentRow);
+
 		if( tableCurrentRow.IsActive === "TRUE" ){
 			tableCurrentRow.IsActive = true;
 		}
@@ -161,7 +178,7 @@ class TablePopup extends Component {
 															onChange= {this._handleChangeCountry}
 															component={Select} 
 															options={countries}
-															value= {selectedCountry}
+															value= {this.state.selectedCountry}
 														/>
 													</div>
 												</div>
@@ -237,6 +254,27 @@ class TablePopup extends Component {
 														<label>is active</label>
 													</div>
 												</div>
+												<div className= 'input-field-container-for-popup'>
+													<label className='label-for-fileld'>Amount</label>
+													<div className='field-wrapper'>
+														<div className= "amount-wrapper">
+															<Field
+																name="Amount"
+																component={TextField}
+																type="text"
+																label="Amount"
+															/>
+															<Field 
+																name= "Currency"
+																defaultInputValue= {tableCurrentRow.Currency}
+																onChange= {this._handleChangeCurrency}
+																component={Select} 
+																options={currency}
+																value= {selectedCurrency}
+															/>
+														</div>
+													</div>
+												</div>
 											</div>	
 											
 										</div>
@@ -270,8 +308,8 @@ class TablePopup extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		tableData: state.popupReducer.newTableData,
-		tableCurrentRow: state.tableReducer.tableCurrentRow
+		tableData: state.popupReducer.tableData,
+		idOfTableRow: state.tableReducer.idOfTableRow
 	}
 }
 

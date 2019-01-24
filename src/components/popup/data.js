@@ -353,6 +353,18 @@ let industries = [
   "Writing/Editing"
 ];
 
+let currency = [
+  "USD",
+  "EUR",
+  "GBP",
+  "DKK"
+];
+
+currency = Object.keys(currency).map(value => ({
+  value,
+  label: currency[value]
+}));
+
 countries = Object.keys(countries).map(value => ({
   value,
   label: countries[value]
@@ -365,5 +377,6 @@ industries = Object.keys(industries).map(value => ({
 
 export {
   countries,
-  industries
+  industries,
+  currency
 }

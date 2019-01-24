@@ -80,11 +80,11 @@
 .field-wrapper{
   display: flex;
   font-size: 15px;
-  flex-direction: column;
+  flex-direction: row;
   width: 15vw;
   height: 100%;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .field-gender-wrapper{
@@ -126,6 +126,11 @@
   width: auto;
 }
 
+.amount-wrapper{
+  display: flex;
+  width: 70%;
+}
+
 .buttons-wrapper{
   display: flex;
   width: 100%;
@@ -144,6 +149,9 @@
 
 .css-10nd86i{
   width: 70%;
+  position: relative;
+  padding-top: 7px;
+  box-sizing: border-box;
 }
 
 .css-vj8t7z{
