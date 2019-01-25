@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { Form, Field } from "react-final-form";
 import TextField from "./textField";
 import Button from '@material-ui/core/Button';
-import { history } from '../app';
+import { withRouter } from "react-router-dom";
 
 import './login.css';
 
-export default class Login extends Component {
+class Login extends Component {
 
   _onSubmit = values => {
+    const { history } = this.props;
     if (values.username === 'admin' && values.password === 'admin'){
       history.push('/grid');
     }
@@ -73,4 +74,4 @@ export default class Login extends Component {
   }
 }
   
-
+export default withRouter(Login);

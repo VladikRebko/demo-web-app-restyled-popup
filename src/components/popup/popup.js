@@ -5,7 +5,7 @@ import TextField from "../login/textField";
 import Button from '@material-ui/core/Button';
 import InputRange from 'react-input-range';
 import Select from 'react-select';
-import { history } from '../app';
+import { withRouter } from "react-router-dom";
 
 import {countries, industries, currency } from './data';
 
@@ -58,10 +58,11 @@ class TablePopup extends Component {
 	}
 
 	_onSubmit = (values) =>{
+		const { history } = this.props;
+		const { tableData, changeTableData, ntableData } = this.props;
 
-		const { tableData, changeTableData, idOfTableRow } = this.props;
 
-		console.log(tableData, idOfTableRow);
+		console.log(ntableData);
 
 		if( values.IsActive ){
 			values.IsActive = "TRUE";
@@ -73,23 +74,20 @@ class TablePopup extends Component {
 		values.Industry = this.state.selectedIndustry.label;		
 		values.Currency = this.state.selectedCurrency.label;
 
-		console.log(values.Currency)
 		const newTableData = tableData.map(element => element['ID'] === values['ID']
 			? values
 			: element
 		);
 
 		changeTableData(newTableData);
-		history.goBack();
+		history.replace(`/grid`);
 	};
 
   render(){
-
+		const { history } = this.props;
 		const { selectedCountry, selectedIndustry, selectedCurrency } = this.state;
 
 		const tableCurrentRow = this._getTableDataRow();
-
-		console.log(tableCurrentRow);
 
 		if( tableCurrentRow.IsActive === "TRUE" ){
 			tableCurrentRow.IsActive = true;
@@ -178,7 +176,7 @@ class TablePopup extends Component {
 															onChange= {this._handleChangeCountry}
 															component={Select} 
 															options={countries}
-															value= {this.state.selectedCountry}
+															value= {selectedCountry}
 														/>
 													</div>
 												</div>
@@ -313,9 +311,9 @@ const mapStateToProps = (state) => {
 	}
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   {
 		changeTableData
   }
-)(TablePopup);
+)(TablePopup));

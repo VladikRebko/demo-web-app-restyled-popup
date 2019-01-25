@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-// import data from './LeadsData.js';
+
+import { withRouter } from "react-router-dom";
+
 import { connect } from 'react-redux';
-import { history } from '../app';
 
 import { setIdOfTableRow } from '../../redux/actions/tableActions/tableActions';
 
-// Import React Table
+
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
@@ -21,8 +22,12 @@ class Grid extends Component {
       <div
         style={{ backgroundColor: "#fafafa" }}
         onClick={e => {
-          history.push('/popup');
-          // console.log(setIdOfTableRow(elementId));
+
+          const { history } = this.props;
+
+          const newPath = `/popup/${elementId}`
+          history.push(newPath);
+
           setIdOfTableRow(elementId);
         }}
         dangerouslySetInnerHTML={{
@@ -100,9 +105,9 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   {
     setIdOfTableRow
   }
-  )(Grid);
+  )(Grid));
