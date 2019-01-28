@@ -25,7 +25,7 @@ class Grid extends Component {
 
           const { history } = this.props;
 
-          const newPath = `/popup/${elementId}`
+          const newPath = `/details/${elementId}`
           history.push(newPath);
 
           setIdOfTableRow(elementId);
@@ -40,8 +40,6 @@ class Grid extends Component {
   render() {
     const { tableData } = this.props;
 
-    // console.log(tableData);
-
     return (
       <div>
         <ReactTable
@@ -52,7 +50,7 @@ class Grid extends Component {
               Header: "Company",
               accessor: "Company",
               Cell: this.renderEditable,
-              minWidth: 270
+              minWidth: 150
             },
             {
               Header: "Last Name",
@@ -70,25 +68,25 @@ class Grid extends Component {
               Header: "Email",
               accessor: "Email",
               Cell: this.renderEditable,
-              minWidth: 325
+              minWidth: 150
             },
             {
               Header: "Amount",
               accessor: "Amount",
               Cell: this.renderEditable,
-              minWidth: 80
+              minWidth: 50
             },
             {
               Header: "Currency",
               accessor: "Currency",
               Cell: this.renderEditable,
-              minWidth: 80
+              minWidth: 40
             },
             {
               Header: "Win%",
               accessor: "WinChance",
               Cell: this.renderEditable,
-              minWidth: 110 
+              minWidth: 40 
             }
           ]}
           defaultPageSize={23}

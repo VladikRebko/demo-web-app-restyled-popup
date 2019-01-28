@@ -11,8 +11,6 @@ import TablePopup from '../popup'
 
 import { setIdOfTableRow } from '../../redux/actions/tableActions/tableActions';
 
-import './app.css'
-
 const history = createBrowserHistory({
   basename: '/'
 });
@@ -20,20 +18,19 @@ const history = createBrowserHistory({
 class App extends Component{
     
   render(){
-    const { setIdOfTableRow, ntableData } = this.props;
+    const { setIdOfTableRow, newtableData } = this.props;
     return ( 
       <Router history={history}>
         <div className='demo-web-app' >
           
           <Route path="/" exact component={Login}/>
           <Route path="/grid" component={Grid}/>
-          <Route path="/popup" exact component={TablePopup}/>
-          <Route path="/popup/:id" 
+          <Route path="/details" exact component={TablePopup}/>
+          <Route path="/details/:id" 
                  render= { ({ match }) =>{
                    const { id } = match.params;
-                  //  console.log( id );
                   setIdOfTableRow(id + '');
-                   return( <TablePopup  ntableData={ntableData}/> )
+                   return( <TablePopup  newtableData={newtableData}/> )
                  }}/> 
         </div>
       </Router>
@@ -43,7 +40,7 @@ class App extends Component{
 
 const mapStateToProps = (state) => {
 	return {
-    ntableData: state.popupReducer.tableData,
+    newtableData: state.popupReducer.tableData,
   };
 }
 
