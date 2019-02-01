@@ -13,7 +13,7 @@ const tableReducer = ( state = initialState, action ) => {
       
       const { idOfTableRow } = payload;
 
-      console.log(idOfTableRow);
+      // console.log(idOfTableRow);
 
       return {
         idOfTableRow

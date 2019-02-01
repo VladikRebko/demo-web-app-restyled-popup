@@ -63,12 +63,9 @@ class TablePopup extends Component {
  });
 	};
 
-	_onSubmit = (values) =>{
+	onSubmitForm = (values) =>{
 		const { history } = this.props;
 		const { tableData, changeTableData, ntableData } = this.props;
-
-
-		console.log(ntableData);
 
 		if( values.IsActive ){
 			values.IsActive = "TRUE";
@@ -84,19 +81,25 @@ class TablePopup extends Component {
 			? values
 			: element
 		);
-
-		changeTableData(newTableData);
+		// console.log(this.inputCheckBox.checked);
+		// changeTableData(newTableData);
 		history.replace(`/grid`);
+		values.preventDefault();
+		values.stopPropagation();
 	};
 
-  render(){
-		const { history } = this.props;
+	componentDidMount(){
+		console.log(this.inputCheckBox);	
+	}
 
-		const { 
-			selectedCountry, 
-			selectedIndustry, 
-			selectedCurrency 
-		} = this.state;
+  render(){
+		// const { history } = this.props;
+
+		// const { 
+		// 	selectedCountry, 
+		// 	selectedIndustry, 
+		// 	selectedCurrency 
+		// } = this.state;
 
 		const tableCurrentRow = this._getTableDataRow();
 
@@ -116,14 +119,18 @@ class TablePopup extends Component {
  
 		if( tableCurrentRow.IsActive === "TRUE" ){
 			tableCurrentRow.IsActive = true;
+			
 		}
 		else tableCurrentRow.IsActive = false;
 		
+		
+
+	
     return(
 
 			<div className={'show-popup'}>
 				<div className={'popup-wrapper'}>
-					<form className='form-for-popup' onSubmit={ () => {console.log('cool')} }>
+					<form className='form-for-popup' onSubmit={this.onSubmitForm}>
 						<div className='edit-fields'>
 							<div className='fields-container'>
 								
@@ -149,18 +156,18 @@ class TablePopup extends Component {
 								</div>
 
 									<div className= 'input-field-container-for-popup'>
-									<label className='label-for-fileld'>First Name</label>
-									<div className='field-wrapper'>
+										<label className='label-for-fileld'>First Name</label>
+										<div className='field-wrapper'>
 
-									<input 
-										type='text'
-										name="FirstName"
-										placeholder="FirstName"
-										autoComplete="off"
-										defaultValue={FirstName}
-									/>
+										<input 
+											type='text'
+											name="FirstName"
+											placeholder="FirstName"
+											autoComplete="off"
+											defaultValue={FirstName}
+										/>
 
-									</div>
+										</div>
 								</div>
 
 								<div className= 'input-field-container-for-popup'>
@@ -248,7 +255,7 @@ class TablePopup extends Component {
 														type="radio"
 														value="Male"
 													/> */}
-													<input type="radio" name="Gender" value="Male" />
+													<input type="radio" name="Gender" value="Male"  />
 													{' '}
 													Male
 
@@ -282,8 +289,8 @@ class TablePopup extends Component {
 											value = {selectedIndustry}
 										/> */}
 
-										<select className="select-country">
-											<option>Пункт 1</option>
+										<select className="select-country" >
+											<option>Пуasdasdнкт 1</option>
 											<option>Пункт 2</option>
 										</select>
 									</div>
@@ -319,9 +326,10 @@ class TablePopup extends Component {
 											type="checkbox"
 										/> */}
 										<input 
+											ref={(input) => { this.inputCheckBox = input }}
 											type="checkbox"
 											name="IsActive"
-											defaultValue={tableCurrentRow.IsActive}
+											defaultChecked={tableCurrentRow.IsActive}
 										/>
 										<label>is active</label>
 									</div>
@@ -361,19 +369,15 @@ class TablePopup extends Component {
 						</div>
 						<div className='buttons-wrapper'>
 							<div className='buttons-container'>
-								<Button
-									color="secondary"
-									size="large"
-									variant="outlined">
+								<button>
 										Close
-								</Button>
-								<Button
+								</button>
+								<button
 									type="submit"
-									size="large"
-									variant="outlined"
-									color="primary">
+									color="primary"
+									>
 									Save
-								</Button>
+								</button>
 							</div>
 						</div>
 					</form>
