@@ -361,17 +361,17 @@ let currency = [
 ];
 
 currency = Object.keys(currency).map(value => ({
-  value,
+  value: currency[value],
   label: currency[value]
 }));
 
 countries = Object.keys(countries).map(value => ({
-  value,
+  value: countries[value],
   label: countries[value]
 }));
 
 industries = Object.keys(industries).map(value => ({
-  value,
+  value: industries[value],
   label: industries[value]
 }));
 

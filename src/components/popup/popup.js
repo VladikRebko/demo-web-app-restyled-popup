@@ -63,34 +63,91 @@ class TablePopup extends Component {
  });
 	};
 
-	onSubmitForm = (values) =>{
+	onSubmitForm = (event) =>{
 		const { history } = this.props;
 		const { tableData, changeTableData, ntableData } = this.props;
 
-		if( values.IsActive ){
-			values.IsActive = "TRUE";
+		console.log(event.target.children);
+
+		if( event.IsActive ){
+			event.IsActive = "TRUE";
 		}
-		else values.IsActive = "FALSE";
+		else event.IsActive = "FALSE";
 
-		values.WinChance = this.state.valueOfWinChance + '';
-		values.Country = this.state.selectedCountry.label;
-		values.Industry = this.state.selectedIndustry.label;		
-		values.Currency = this.state.selectedCurrency.label;
+		event.WinChance = this.state.valueOfWinChance + '';
+		event.Country = this.state.selectedCountry.label;
+		event.Industry = this.state.selectedIndustry.label;		
+		event.Currency = this.state.selectedCurrency.label;
 
-		const newTableData = tableData.map(element => element['ID'] === values['ID']
-			? values
+		const newTableData = tableData.map(element => element['ID'] === event['ID']
+			? event
 			: element
 		);
 		// console.log(this.inputCheckBox.checked);
 		// changeTableData(newTableData);
-		history.replace(`/grid`);
-		values.preventDefault();
-		values.stopPropagation();
+		// history.replace(`/grid`);
+		// console.log(this.form.elements);
+		// console.log(this.selectForCurrency.options);
+		event.preventDefault();
 	};
 
 	componentDidMount(){
-		console.log(this.inputCheckBox);	
-	}
+
+		const tableCurrentRow = this._getTableDataRow();
+
+		const { 
+			Country,
+			Industry,
+			Currency,
+			Gender
+		} = tableCurrentRow;
+
+		const optionListForCurrency = this.selectForCurrency.options; 
+		const optionsForCurrency = currency;
+
+		optionsForCurrency.forEach(option =>
+			optionListForCurrency.add(
+				new Option(option.value, option.label)
+			)
+		);
+
+		// console.log(this.selectForCurrency.options);
+
+		const optionListForIndusties = this.selectForIndustry.options; 
+		const optionsForIndustries = industries;
+	
+
+		optionsForIndustries.forEach(option =>
+			optionListForIndusties.add(
+				new Option(option.value, option.label)
+			)
+		);
+
+		// console.log(this.selectForIndustry.options);
+
+		const optionListForCountry = this.selectForCountry.options; 
+		const optionsForCountry = countries;
+	
+
+		optionsForCountry.forEach(option =>
+			optionListForCountry.add(
+				new Option(option.value, option.label)
+			)
+		);
+				
+		// this.containerForGenderFields.children.forEach( (item) => {
+		// 	console.log(item);
+		// })
+
+		// console.log(Country, Industry, Currency, Gender);
+
+		for (let i = 0; i < this.containerForGenderFields.children.length; i++){
+
+			if(this.containerForGenderFields.children[i].children[0].value === Gender)
+			this.containerForGenderFields.children[i].children[0].setAttribute('checked', null);
+		}
+		
+	};
 
   render(){
 		// const { history } = this.props;
@@ -109,12 +166,10 @@ class TablePopup extends Component {
 			Email, 
 			Phone, 
 			Company, 
-			Country, 
-			Gender, 
-			Industry, 
-			WinChance, 
-			Amount, 
-			Currency
+			Amount,
+			Currency,
+			Industry,
+			Country
 		} = tableCurrentRow;
  
 		if( tableCurrentRow.IsActive === "TRUE" ){
@@ -130,7 +185,7 @@ class TablePopup extends Component {
 
 			<div className={'show-popup'}>
 				<div className={'popup-wrapper'}>
-					<form className='form-for-popup' onSubmit={this.onSubmitForm}>
+					<form className='form-for-popup' ref={(form) => { this.form = form }} onSubmit={this.onSubmitForm}>
 						<div className='edit-fields'>
 							<div className='fields-container'>
 								
@@ -226,16 +281,19 @@ class TablePopup extends Component {
 											value= {selectedCountry}
 										/> */}
 
-										<select className="select-country">
-											<option>Пункт 1</option>
-											<option>Пункт 2</option>
-										</select>
+										<select 
+											className="select-country"
+											ref={(select) => { this.selectForCountry = select }}
+											onChange = { (event) => { console.log(event.target.value) }}>
+												<option defaultValue={Country} hidden>{Country}</option>
+
+											</select>
 									</div>
 								</div>
 
 								<div className= 'input-field-container-for-popup'>
 									<label className='label-for-fileld'>Gender</label>
-									<div className='field-gender-wrapper'>
+									<div className='field-gender-wrapper' ref={(div) => { this.containerForGenderFields = div }}>
 											<label className='label-for-gender-field'>
 													{/* <Field
 														name="Gender"
@@ -289,10 +347,13 @@ class TablePopup extends Component {
 											value = {selectedIndustry}
 										/> */}
 
-										<select className="select-country" >
-											<option>Пуasdasdнкт 1</option>
-											<option>Пункт 2</option>
-										</select>
+										<select 
+											className="select-industry" 
+											ref={(select) => { this.selectForIndustry = select }}>
+
+												<option defaultValue={Industry} hidden>{Industry[0]}</option>
+
+											</select>
 									</div>
 								</div>
 								<div className='input-field-container-for-popup'>
@@ -326,7 +387,6 @@ class TablePopup extends Component {
 											type="checkbox"
 										/> */}
 										<input 
-											ref={(input) => { this.inputCheckBox = input }}
 											type="checkbox"
 											name="IsActive"
 											defaultChecked={tableCurrentRow.IsActive}
@@ -338,12 +398,7 @@ class TablePopup extends Component {
 									<label className='label-for-fileld'>Amount</label>
 									<div className='field-wrapper'>
 										<div className= "amount-wrapper">
-											{/* <Field
-												name="Amount"
-												component={TextField}
-												type="text"
-												label="Amount"
-											/>
+											{/*
 											<Field 
 												name= "Currency"
 												defaultInputValue= {tableCurrentRow.Currency}
@@ -358,10 +413,13 @@ class TablePopup extends Component {
 													autoComplete="off"
 													defaultValue={Amount}
 											/>
-											<select className="select-country" defaultValue={tableCurrentRow.Currency}>
-												<option>Пункт 1</option>
-												<option>Пункт 2</option>
-											</select>
+											<select 
+												className="select-currency"
+												ref={(select) => { this.selectForCurrency = select }}>
+
+												<option defaultValue={Currency} hidden>{Currency}</option>
+
+												</select>
 										</div>
 									</div>
 								</div>
