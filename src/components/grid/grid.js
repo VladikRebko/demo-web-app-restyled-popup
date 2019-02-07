@@ -4,9 +4,6 @@ import { withRouter } from "react-router-dom";
 
 import { connect } from 'react-redux';
 
-import { setIdOfTableRow } from '../../redux/actions/tableActions/tableActions';
-
-
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
@@ -14,21 +11,17 @@ class Grid extends Component {
   
   renderEditable = (cellInfo) => {
     const elementId = cellInfo.index + 1; //We add 1 because our json data begin from index: 1
-    const { setIdOfTableRow } = this.props;
-    
-    
 
     return (
       <div
         style={{ backgroundColor: "#fafafa" }}
-        onClick={e => {
+        onClick={ () => {
 
           const { history } = this.props;
 
           const newPath = `/details/${elementId}`
           history.push(newPath);
 
-          setIdOfTableRow(elementId);
         }}
         dangerouslySetInnerHTML={{
         	__html: this.props.tableData[cellInfo.index][cellInfo.column.id]
@@ -104,8 +97,5 @@ const mapStateToProps = (state) => {
 }
 
 export default withRouter(connect(
-  mapStateToProps,
-  {
-    setIdOfTableRow
-  }
+  mapStateToProps
   )(Grid));
