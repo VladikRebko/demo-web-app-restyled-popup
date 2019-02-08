@@ -298,6 +298,7 @@ class TablePopup extends Component {
 										<div className= "amount-wrapper">
 
 												<input
+													className="input-currency"
 													type="text"
 													name="formElement"
 													placeholder="Amount"
@@ -318,13 +319,14 @@ class TablePopup extends Component {
 								<div className='input-field-container-for-popup'>
 									<label className='label-for-fileld'>Status</label>
 									<div className='field-wrapper'>
-
-										<input 
-											type="checkbox"
-											name="formElement"
-											defaultChecked={IsActive}
-										/>
-										<label>is active</label>
+										<div className='checkbox'>
+											<input 
+												type="checkbox"
+												name="formElement"
+												defaultChecked={IsActive}
+											/>
+											<label>is active</label>
+										</div>
 									</div>
 								</div>
 							</div>	

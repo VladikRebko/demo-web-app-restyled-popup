@@ -65,11 +65,12 @@
 
 .input-field-container-for-popup{
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
   height: 15vh;
 }
+
 
 .label-for-fileld{
   width: 150px;
@@ -106,16 +107,6 @@
   width: 70%;
 }
 
-.MuiFormControl-root-1{
-  display: flex;
-  width: 70%;
-}
-
-.field-wrapper .input-range{
-  display: flex;
-  width: 70%;
-}
-
 .field-wrapper select{
   display: flex;
   width: 70%;
@@ -123,13 +114,17 @@
 
 .field-wrapper input{
   display: flex;
-  width: auto;
+  width: 70%;
 }
 
 .amount-wrapper{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 70%;
+}
+
+.field-wrapper .select-currency{
+  width: 35%;
 }
 
 .buttons-wrapper{
@@ -148,13 +143,13 @@
   width: 30%;
 }
 
-.css-10nd86i{
-  width: 70%;
-  position: relative;
-  padding-top: 7px;
-  box-sizing: border-box;
+.field-wrapper input[type=checkbox]{
+  width: auto;
 }
 
-.css-vj8t7z{
+.field-wrapper .checkbox{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   width: 100%;
 }
