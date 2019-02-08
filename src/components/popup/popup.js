@@ -5,199 +5,141 @@ import { withRouter } from "react-router-dom";
 
 import {countries, industries, currency } from './data';
 
-import { changeTableData, getCurrentRow } from '../../redux/actions/popupActions/popupActions';
+import { changeTableData } from '../../redux/actions/popupActions/popupActions';
 
 import './popup.css';
 
 class TablePopup extends Component {
 
-	// getWinChance = (name) => {
+
+	getJSONField= (name) => {
 		
-	// 	const { history, match } = this.props;
-	// 	const { id } = match.params;
-	// 	const tableCurrentRow = getCurrentRow(id);
-	// 	return tableCurrentRow[name];
-	// }
-
-	// state = {
-	// 	valueOfWinChance: this.getWinChance("WinChance")
-	// };
-
-	// _handleChangeCountry = (selectedCountry) => {
-	// 	this.setState( () =>{ return{selectedCountry} });
-	// };
-
-	// _handleChangeIndustry = (selectedIndustry) => {
-  //   this.setState(() =>{ return{selectedIndustry}});
-	// };
-	
-	// _handleChangeCurrency = (selectedCurrency) => {
-	// 	this.setState( () =>{ return{selectedCurrency} });
-	// };
-
-	// _onWinChanceChange = (value) => {
-	// 	this.setState({
-	// 		valueOfWinChance: value
- 	// 	});
-	// };
-
-	componentDidUpdate(){
-		const { match } = this.props;
-
-
+		const { match, tableData } = this.props;
 		const { id } = match.params;
-
-		getCurrentRow(id);
+		const tableCurrentRow = tableData[id - 1];
+		return tableCurrentRow[name];
 	}
 
-	onSubmitForm = (event) =>{
-			const {tableCurrentRow} = this.props;
-
-		console.log(tableCurrentRow);
-		// const { history } = this.props;
-		// const { tableData, changeTableData } = this.props;
-
-		// // console.log(event.target.children);
-
-		// if( event.IsActive ){
-		// 	event.IsActive = "TRUE";
-		// }
-		// else event.IsActive = "FALSE";
-
-		// event.WinChance = this.state.valueOfWinChance + '';
-		// event.Country = this.state.selectedCountry.label;
-		// event.Industry = this.state.selectedIndustry.label;		
-		// event.Currency = this.state.selectedCurrency.label;
-
-		// // console.log(this.inputCheckBox.checked);
-		// // changeTableData(newTableData);
-		// // history.replace(`/grid`);
-		// // console.log(this.form.elements);
-		// // console.log(this.selectForCurrency.options);
-
-		// event.preventDefault();
-		// let formData = new FormData(this.form);
-
-		// console.log(formData.getAll('formElement'));
-		// changeTableData(event);
-		// // history.replace(`/grid`);
-		
-		// event.stopPropagation();
+	state = {
+		valueOfWinChance: this.getJSONField("WinChance")
 	};
 
-	// componentDidMount(){
 
-	// 	const { history, match } = this.props;
-	// 	const { id } = match.params;
-	// 	const tableCurrentRow = getCurrentRow(id);
-
-	// 	const { 
-	// 		Gender
-	// 	} = tableCurrentRow;
-
-	// 	const optionListForCurrency = this.selectForCurrency.options; 
-	// 	const optionsForCurrency = currency;
-
-	// 	optionsForCurrency.forEach(option =>
-	// 		optionListForCurrency.add(
-	// 			new Option(option.value, option.label)
-	// 		)
-	// 	);
-
-	// 	// console.log(this.selectForCurrency.options);
-
-	// 	const optionListForIndusties = this.selectForIndustry.options; 
-	// 	const optionsForIndustries = industries;
+	_onWinChanceChange = (value) => {
+			this.setState({
+				valueOfWinChance: value
+		 	});
+		};
 	
-
-	// 	optionsForIndustries.forEach(option =>
-	// 		optionListForIndusties.add(
-	// 			new Option(option.value, option.label)
-	// 		)
-	// 	);
-
-	// 	// console.log(this.selectForIndustry.options);
-
-	// 	const optionListForCountry = this.selectForCountry.options; 
-	// 	const optionsForCountry = countries;
-	
-
-	// 	optionsForCountry.forEach(option =>
-	// 		optionListForCountry.add(
-	// 			new Option(option.value, option.label)
-	// 		)
-	// 	);
-				
-	// 	// this.containerForGenderFields.children.forEach( (item) => {
-	// 	// 	console.log(item);
-	// 	// })
-
-	// 	// console.log(Country, Industry, Currency, Gender);
-
-	// 	for (let i = 0; i < this.containerForGenderFields.children.length; i++){
-
-	// 		if(this.containerForGenderFields.children[i].children[0].value === Gender)
-	// 		this.containerForGenderFields.children[i].children[0].setAttribute('checked', null);
-	// 	}
+	onSubmitForm = (event) =>{
 		
-	// };
+		const { tableData } = this.props;
+		const { match } = this.props;
+		const { id } = match.params;
 
-	// componentWillMount(){
-	// 	const { history, match, tableCurrentRow } = this.props;
+		const tableCurrentRow = tableData[id - 1];
 
+		event.preventDefault();
+		const { history } = this.props;
 
-	// 	const { id } = match.params;
-	// 	// const { 
-	// 	// 	selectedCountry, 
-	// 	// 	selectedIndustry, 
-	// 	// 	selectedCurrency 
-	// 	// } = this.state;
+		let formData = new FormData(this.form).getAll('formElement');
+		tableCurrentRow.LastName = formData[0];
+		tableCurrentRow.FirstName = formData[1];
+		tableCurrentRow.Email = formData[2];
+		tableCurrentRow.Phone = formData[3];
+		tableCurrentRow.Company = formData[4];
+		tableCurrentRow.Country = formData[5];
+		tableCurrentRow.Gender = formData[6];
+		tableCurrentRow.Industry = formData[7];
+		tableCurrentRow.WinChance = formData[8];
+		tableCurrentRow.Amount = formData[9];
+		tableCurrentRow.Currency = formData[10];
 
-	// 	getCurrentRow(id);
-	// }
-
-  render(){
-		// const { history, match, tableCurrentRow } = this.props;
-
-
-		// const { id } = match.params;
-		// const { 
-		// 	selectedCountry, 
-		// 	selectedIndustry, 
-		// 	selectedCurrency 
-		// } = this.state;
-
-		// getCurrentRow(id);
-
+		if(formData.length === 12){
+			formData[11] = "TRUE"
+			tableCurrentRow.IsActive = formData[11];
+		}
+		else tableCurrentRow.IsActive = "FALSE"
+		
 		// console.log(tableCurrentRow);
+		history.replace(`/grid`);
+		changeTableData(tableCurrentRow);
+	};
 
-		// const { 
-		// 	LastName, 
-		// 	FirstName, 
-		// 	Email, 
-		// 	Phone, 
-		// 	Company, 
-		// 	Amount,
-		// 	Currency,
-		// 	Industry,
-		// 	Country
-		// } = tableCurrentRow;
- 
-		// if( tableCurrentRow.IsActive === "TRUE" ){
-		// 	tableCurrentRow.IsActive = true;
-			
-		// }
-		// else tableCurrentRow.IsActive = false;
-		
-		
+	_addOptions = (optionList, optionCurrencyForSelect) => {
+		optionCurrencyForSelect.forEach(option =>
+			optionList.add(
+				new Option(option.value, option.label)
+			)
+		);
+	};
 
+	componentDidMount(){
+
+		const { match, tableData } = this.props;
+		const { id } = match.params;
+
+		const tableCurrentRow = tableData[id - 1];
+		const { 
+			Gender
+		} = tableCurrentRow;
+
+		const optionListForCurrency = this.selectForCurrency.options; 
+		const optionsForCurrency = currency;
+
+		this._addOptions(optionListForCurrency, optionsForCurrency);
+
+		const optionListForIndusties = this.selectForIndustry.options; 
+		const optionsForIndustries = industries;
+		
+		this._addOptions(optionListForIndusties, optionsForIndustries);
+
+		const optionListForCountry = this.selectForCountry.options; 
+		const optionsForCountry = countries;
 	
+		this._addOptions(optionListForCountry, optionsForCountry);
+
+		for (let i = 0; i < this.containerForGenderFields.children.length; i++){
+
+			if(this.containerForGenderFields.children[i].children[0].value === Gender)
+			this.containerForGenderFields.children[i].children[0].setAttribute('checked', null);
+		}
+		
+	};
+
+  render(){	
+		const {history, match } = this.props;
+		const { id } = match.params;
+
+		const { tableData } = this.props;
+
+		const tableCurrentRow = tableData[id - 1];
+		const { 
+			LastName, 
+			FirstName, 
+			Email, 
+			Phone, 
+			Company, 
+			Country,
+			Industry,
+			Amount,
+			Currency
+		} = tableCurrentRow;
+ 
+		let { IsActive } = tableCurrentRow
+
+		if( IsActive === "TRUE" ){
+			IsActive = true;
+			
+		}
+		else IsActive = false;
+
     return(
 
 			<div className={'show-popup'}>
 				<div className={'popup-wrapper'}>
-					{/* <form className='form-for-popup' ref={(form) => { this.form = form }} onSubmit={this.onSubmitForm}> */}
-						{/* <div className='edit-fields'>
+					<form className='form-for-popup' ref={(form) => { this.form = form }} onSubmit={this.onSubmitForm}>
+						<div className='edit-fields'>
 							<div className='fields-container'>
 								
 							<div className= 'input-field-container-for-popup'>
@@ -282,8 +224,7 @@ class TablePopup extends Component {
 										<select 
 											className="select-country"
 											name="formElement"
-											ref={(select) => { this.selectForCountry = select }}
-											onChange = { (event) => { console.log(event.target.value) }}>
+											ref={(select) => { this.selectForCountry = select }}>
 												<option defaultValue={Country} hidden>{Country}</option>
 
 											</select>
@@ -351,18 +292,6 @@ class TablePopup extends Component {
 
 									</div>
 								</div>
-								<div className='input-field-container-for-popup'>
-									<label className='label-for-fileld'>Status</label>
-									<div className='field-wrapper'>
-
-										<input 
-											type="checkbox"
-											name="formElement"
-											defaultChecked={tableCurrentRow.IsActive}
-										/>
-										<label>is active</label>
-									</div>
-								</div>
 								<div className= 'input-field-container-for-popup'>
 									<label className='label-for-fileld'>Amount</label>
 									<div className='field-wrapper'>
@@ -386,23 +315,35 @@ class TablePopup extends Component {
 										</div>
 									</div>
 								</div>
+								<div className='input-field-container-for-popup'>
+									<label className='label-for-fileld'>Status</label>
+									<div className='field-wrapper'>
+
+										<input 
+											type="checkbox"
+											name="formElement"
+											defaultChecked={IsActive}
+										/>
+										<label>is active</label>
+									</div>
+								</div>
 							</div>	
-						</div> */}
+						</div>
 						<div className='buttons-wrapper'>
 							<div className='buttons-container'>
-								<button>
+								<button
+									onClick = {() => { history.goBack() } }	
+								>
 										Close
 								</button>
 								<button
-									type="submit"
-									color="primary"
 									onClick = {this.onSubmitForm}
 									>
 									Save
 								</button>
 							</div>
 						</div>
-					{/* </form> */}
+					</form>
 				</div>
 			</div>
 			);
@@ -419,7 +360,6 @@ const mapStateToProps = (state) => {
 export default withRouter(connect(
   mapStateToProps,
   {
-		changeTableData,
-		getCurrentRow
+		changeTableData
   }
 )(TablePopup));

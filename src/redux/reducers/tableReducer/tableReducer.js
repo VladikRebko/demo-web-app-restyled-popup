@@ -1,29 +1,27 @@
-import { SET_ID_OF_TABLE_ROW } from '../../actions/tableActions/tableActions.js';
+// import { SET_ID_OF_TABLE_ROW } from '../../actions/tableActions/tableActions.js';
 
-const initialState = {
-  idOfTableRow: '1'
-};
+// const initialState = {
+//   idOfTableRow: '1'
+// };
 
-const tableReducer = ( state = initialState, action ) => {
-  const { type, payload } = action;
+// const tableReducer = ( state = initialState, action ) => {
+//   const { type, payload } = action;
 
-	switch (type) {
+// 	switch (type) {
 
-    case SET_ID_OF_TABLE_ROW: {
+//     case SET_ID_OF_TABLE_ROW: {
       
-      const { idOfTableRow } = payload;
+//       const { idOfTableRow } = payload;
 
-      // console.log(idOfTableRow);
+//       return {
+//         idOfTableRow
+//       }
+//     }
 
-      return {
-        idOfTableRow
-      }
-    }
+//     default: {
+//       return state;
+//     }
+//   }
+// };
 
-    default: {
-      return state;
-    }
-  }
-};
-
-export default tableReducer;
+// export default tableReducer;

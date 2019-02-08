@@ -1,4 +1,3 @@
-import  App, { history } from './app';
+import  App from './app';
 
-export  { history };
 export default App;
