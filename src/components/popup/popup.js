@@ -234,7 +234,14 @@ class TablePopup extends Component {
 											name="formElement"
 											className="select-industry" 
 										>
-											<option defaultValue={Industry[0]} hidden>{Industry[0]}</option>
+											<option 
+												defaultValue={Industry[0]} 
+												hidden>{
+													Industry.length === 1 
+													? Industry
+													: Industry[0]
+												}
+											</option>
 											{
 												industries.map(value => (
 													<option key={value}>{value}</option>
