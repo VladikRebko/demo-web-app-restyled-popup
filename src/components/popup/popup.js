@@ -96,7 +96,7 @@ class TablePopup extends Component {
 			Phone, 
 			Company, 
 			Country,
-			Industry,
+			Industry: [...Industry],
 			Amount,
 			Currency,
 			Gender
@@ -236,11 +236,7 @@ class TablePopup extends Component {
 										>
 											<option 
 												defaultValue={Industry[0]} 
-												hidden>{
-													Industry.length === 1 
-													? Industry
-													: Industry[0]
-												}
+												hidden>{Industry}
 											</option>
 											{
 												industries.map(value => (
